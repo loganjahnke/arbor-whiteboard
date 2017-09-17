@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Arboard</title>
+
+	<!-- Styling -->
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/paper-full.min.js"></script>
+	<script type="text/javascript" src="js/whiteboard.js"></script>
+	<script type="text/javascript" src="js/synch.js"></script>
+	<script type="text/paperscript" src="js/arboard.js" canvas="can"></script>
+</head>
+
+<body onload="init()" class="lock-screen">
+	<!-- TODO: put all this styling in a styling sheet! -->
+	<img id="curr-image" src="images/white.gif" style="width:50%;height:50%;position:absolute;bottom:25%;left:25%;" />
+	<canvas id="can" resize></canvas>
+	<input type="file" id="file-getter" size="33" onchange="readURL(this);" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:9%;right:6%;">
+	<input type="button" value="clear" id="clr" size="33" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:15%;right:6%;">
+	<input type="button" value="clear image" id="clr-img" onclick="clearImage();" size="33" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:3%;right:6%;">
+
+	<p id="stroke-desc">Stroke</p>
+	<div id="stroke"></div>
+
+	<p id="opacity-desc">Opacity</p>
+	<div id="opacity"></div>
+</body>
+
+</html>

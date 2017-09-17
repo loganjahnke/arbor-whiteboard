@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Welcome to Arboard</title>
+
+	<!-- Styling -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+	<div class="outer">
+		<div class="middle">
+			<div class="inner" id="welcome">
+				<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+				<input type="button" id="create-session" class="btn" value="Create Session" onclick="showLogin()" />
+			</div>
+			<div class="inner" id="login-form">
+				<form method="post" onsubmit="return authenticate()">
+					<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+					<p>Sign in to create a session</p>
+					<input type="text" id="login" placeholder="Email Address" name="email">
+					<input type="password" id="password" name="password" placeholder="Password">
+					<input type="submit" id="dologin" value="Login">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

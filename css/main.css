@@ -1,0 +1,120 @@
+body {
+    font-family: 'Lato';
+    background-color: #4BC6FF;
+}
+
+h1 {
+    font-size: 86px;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 35%;
+    background-color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.thin {
+    font-weight: 300;
+}
+
+.small {
+    font-size: 36px;
+}
+
+.btn {
+    display: inline-block;
+    background: rgb(116, 116, 116);
+    border: 0;
+    line-height: 2.5em;
+    padding: 15px;
+    margin-bottom: 1em;
+    outline: none;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.btn:hover {
+    cursor: pointer;
+    display: inline-block;
+    background: rgb(116, 116, 116);
+    border: 0;
+    font-weight: 900;
+    line-height: 2.5em;
+    padding: 15px;
+    margin-bottom: 1em;
+    outline: none;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+#can {
+    position: absolute;
+    height: 96%;
+    width: 96%;
+    top: 2%;
+    left: 2%;
+    border: 2px solid;
+}
+
+.lock-screen {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+#stroke-desc {
+    position: absolute;
+    top: 75px;
+    left: 65px;
+}
+
+#stroke {
+    position: absolute;
+    top: 90px;
+    left: 120px;
+    width: 120px;
+}
+
+#opacity-desc {
+    position: absolute;
+    top: 105px;
+    left: 65px;
+}
+
+#opacity {
+    position: absolute;
+    top: 120px;
+    left: 120px;
+    width: 120px;
+}
+
+#login-form {
+    display: none;
+}
+
+input {
+    font-family: 'Lato';
+}
