@@ -40,21 +40,26 @@ function authenticate() {
 }
 
 function createSession(email) {
-    var sessionNumber = randomSession();
+    var sessionNumber;
+    if ($("#session").val() != null) {
+        sessionNumber = $("#session").val();
+    } else {
+        sessionNumber = randomSession();
+    }
 
     firebase.database().ref('sessions/' + sessionNumber).set({
         active: true,
         tutor: email
-    }).then(json => {
+    }).then(function (json) {
         console.log("Successfully created session.");
         document.location.href = "arboard.html?session=" + sessionNumber;
-    }).catch(error => {
+    }).catch(function (error) {
         console.log("Error creating session: " + error);
     });
 }
 
 function randomSession() {
-    return "whiteboard-" + Math.floor(Math.random() * 16777215).toString(16);
+    return Math.floor(Math.random() * 16777215).toString(16) + "-" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 function showLogin() {

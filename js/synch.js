@@ -10,13 +10,16 @@ var config = {
 var app = firebase.initializeApp(config);
 var database = firebase.database();
 var authenticated = false;
+var user = firebase.auth().currentUser;
 
 // Called whenever authentication changes (sign in or out)
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        user = user;
         console.log("Welcome! " + user.isAnonymous ? "You are not anonymous." : "You are anonymous.");
         authenticated = true;
     } else {
+        user = null;
         console.log("Goodbye");
         authenticated = false;
     }
@@ -51,10 +54,16 @@ function authenticate() {
 window.globals.saveJSON = function (json) {
     var params = new URLSearchParams(window.location.search);
     var sessionName = params.get("session");
-    firebase.database().ref('sessions/' + sessionName).set({
-        active: true,
-        data: json
-    });
+    if (user.isAnonymous) {
+        firebase.database().ref('sessions/' + sessionName).update({
+            data: json,
+            client: "present"
+        });
+    } else {
+        firebase.database().ref('sessions/' + sessionName).update({
+            data: json
+        });
+    }
 }
 
 // Called everytime data is updated for paper.js in database
