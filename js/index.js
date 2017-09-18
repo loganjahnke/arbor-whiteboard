@@ -108,7 +108,10 @@ function showLogin() {
     }
 }
 
+// Sign out tutor if logged in
 function showJoin() {
+    firebase.auth().signOut();
+
     $("#join-form").css({
         display: "block"
     });

@@ -22,8 +22,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 display: "none"
             });
         } else {
-            var params = new URLSearchParams(window.location.search);
-            var sessionName = params.get("session");
+            var sessionName = searchParams("session", window.location.search);
             $("#client-password").html("Client Password: " + sessionName);
         }
         ourUser = user;
@@ -38,8 +37,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 // Saves paper.js data
 window.globals.saveJSON = function (json) {
-    var params = new URLSearchParams(window.location.search);
-    var sessionName = params.get("session");
+    var sessionName = searchParams("session", window.location.search);
     if (ourUser.isAnonymous) {
         firebase.database().ref('sessions/' + sessionName).update({
             data: json,
@@ -53,8 +51,7 @@ window.globals.saveJSON = function (json) {
 }
 
 // Called everytime data is updated for paper.js in database
-var params = new URLSearchParams(window.location.search);
-var sessionName = params.get("session");
+var sessionName = searchParams("session", window.location.search);
 var jsonDataUpdate = firebase.database().ref('sessions/' + sessionName + "/data");
 var whole = firebase.database().ref('sessions/' + sessionName);
 jsonDataUpdate.on('value', function (snapshot) {
@@ -71,4 +68,13 @@ whole.on('value', function (snapshot) {
 function endSession() {
     firebase.database().ref('sessions/' + sessionName).remove();
     document.location.href = "session-ended.html";
+}
+
+function searchParams(name, url) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(url);
+    return results == null ? null : results[1];
 }
