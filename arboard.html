@@ -25,12 +25,13 @@
 </head>
 
 <body onload="init()" class="lock-screen">
-	<!-- TODO: put all this styling in a styling sheet! -->
 	<img id="curr-image" src="images/white.gif" style="width:50%;height:50%;position:absolute;bottom:25%;left:25%;" />
 	<canvas id="can" resize></canvas>
-	<input type="file" id="file-getter" size="33" onchange="readURL(this);" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:9%;right:6%;">
-	<input type="button" value="clear" id="clr" size="33" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:15%;right:6%;">
-	<input type="button" value="clear image" id="clr-img" onclick="clearImage();" size="33" style="font-size:18px;width:15%;height:5%;position:absolute;bottom:3%;right:6%;">
+	<p id="client-password">Client Password: N/A</p>
+	<input type="file" id="file-getter" size="33" onchange="readURL(this);">
+	<input type="button" value="Clear" id="clr" size="33">
+	<input type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
+	<input type="button" value="End Session" id="end-session" onclick="endSession();" size="33">
 
 	<p id="stroke-desc">Stroke</p>
 	<div id="stroke"></div>

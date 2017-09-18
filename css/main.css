@@ -1,6 +1,7 @@
 body {
     font-family: 'Lato';
     background-color: #4BC6FF;
+    color: #042A2B;
 }
 
 h1 {
@@ -25,7 +26,7 @@ h1 {
     padding: 25px;
     border-radius: 10px;
     width: 35%;
-    background-color: white;
+    background-color: #FFFAF7;
 }
 
 .center {
@@ -40,9 +41,27 @@ h1 {
     font-size: 36px;
 }
 
+#login,
+#password,
+#session,
+#session-password {
+    background: none;
+    font-family: 'Lato';
+    font-size: 16px;
+    border: none;
+    border-left: 5px solid #042A2B;
+    padding-left: 5px;
+    margin: 10px;
+}
+
+input:focus {
+    outline: 0;
+}
+
 .btn {
+    border-radius: 10px;
     display: inline-block;
-    background: rgb(116, 116, 116);
+    background: #2C4251;
     border: 0;
     line-height: 2.5em;
     padding: 15px;
@@ -55,7 +74,6 @@ h1 {
 .btn:hover {
     cursor: pointer;
     display: inline-block;
-    background: rgb(116, 116, 116);
     border: 0;
     font-weight: 900;
     line-height: 2.5em;
@@ -63,7 +81,11 @@ h1 {
     margin-bottom: 1em;
     outline: none;
     text-decoration: none;
-    color: #FFFFFF;
+}
+
+#join-session,
+.back {
+    background: #D16666;
 }
 
 #can {
@@ -87,34 +109,75 @@ h1 {
 
 #stroke-desc {
     position: absolute;
-    top: 75px;
-    left: 65px;
+    top: 85px;
+    right: 250px;
 }
 
 #stroke {
     position: absolute;
-    top: 90px;
-    left: 120px;
-    width: 120px;
+    top: 105px;
+    right: 55px;
+    width: 165px;
 }
 
 #opacity-desc {
     position: absolute;
-    top: 105px;
-    left: 65px;
+    top: 115px;
+    right: 250px;
 }
 
 #opacity {
     position: absolute;
-    top: 120px;
-    left: 120px;
-    width: 120px;
+    top: 135px;
+    right: 55px;
+    width: 165px;
 }
 
-#login-form {
+#login-form,
+#short-login-form,
+#join-form {
     display: none;
 }
 
 input {
     font-family: 'Lato';
+}
+
+#file-getter {
+    font-size: 18px;
+    width: 165px;
+    position: absolute;
+    right: 55px;
+    bottom: 60px;
+}
+
+#clr {
+    font-size: 18px;
+    width: 165px;
+    position: absolute;
+    right: 55px;
+    bottom: 90px;
+}
+
+#clr-img {
+    font-size: 18px;
+    width: 165px;
+    position: absolute;
+    right: 55px;
+    bottom: 30px;
+}
+
+#client-password {
+    text-align: right;
+    position: absolute;
+    right: 55px;
+    bottom: 110px;
+}
+
+#end-session {
+    font-size: 18px;
+    width: 165px;
+    position: absolute;
+    left: 55px;
+    bottom: 30px;
 }

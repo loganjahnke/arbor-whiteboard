@@ -27,15 +27,15 @@ var opacity = 1;
 
 var colorNames = ["black", "red", "yellow", "green", "blue", "purple"];
 var colors = [];
-var colorSize = 30;
+var colorSize = 40;
 
 var uiLayer = project.activeLayer;
 
 // Initialize color choices for pen in uiLayer
 for (var i = 1; i <= colorNames.length; i++) {
     var rect = new Rectangle({
-        x: i * colorSize,
-        y: colorSize,
+        x: view.size.width - i * colorSize * 1.2 - 10,
+        y: colorSize / 2,
         width: colorSize,
         height: colorSize
     });
@@ -46,6 +46,8 @@ for (var i = 1; i <= colorNames.length; i++) {
 
     colors.push(shape);
 }
+
+
 
 // Color choices are done, drawing layer is now active
 var drawingLayer = new Layer();

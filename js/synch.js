@@ -10,12 +10,23 @@ var config = {
 var app = firebase.initializeApp(config);
 var database = firebase.database();
 var authenticated = false;
-var user = firebase.auth().currentUser;
+var ourUser = firebase.auth().currentUser;
 
 // Called whenever authentication changes (sign in or out)
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        user = user;
+        // Display client login password if tutor is logged in
+        // Hide client login password for client [even though they already have password, they shouldn't invite new people]
+        if (user.isAnonymous) {
+            $("#client-password").css({
+                display: "none"
+            });
+        } else {
+            var params = new URLSearchParams(window.location.search);
+            var sessionName = params.get("session");
+            $("#client-password").html("Client Password: " + sessionName);
+        }
+        ourUser = user;
         console.log("Welcome! " + user.isAnonymous ? "You are not anonymous." : "You are anonymous.");
         authenticated = true;
     } else {
@@ -25,36 +36,11 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-// Check for authentication
-window.onload = function () {
-    authenticate();
-}
-
-// If user is not tutor, sign in anonymously (assuming its client)
-// If accessing non-tutor created session, revoke access
-function authenticate() {
-    if (authenticated) {
-        createSession(firebase.auth().currentUser.email);
-    } else {
-        firebase.database().ref('sessions/' + sessionName + "/data").once('value').then(function (snapshot) {
-            if (snapshot.exists()) {
-                firebase.auth().signInAnonymously().catch(function (error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log("Error signing in anonymously: " + errorCode + " -> " + errorMessage);
-                });
-            }
-        });
-    }
-
-    return false;
-}
-
 // Saves paper.js data
 window.globals.saveJSON = function (json) {
     var params = new URLSearchParams(window.location.search);
     var sessionName = params.get("session");
-    if (user.isAnonymous) {
+    if (ourUser.isAnonymous) {
         firebase.database().ref('sessions/' + sessionName).update({
             data: json,
             client: "present"
@@ -70,6 +56,19 @@ window.globals.saveJSON = function (json) {
 var params = new URLSearchParams(window.location.search);
 var sessionName = params.get("session");
 var jsonDataUpdate = firebase.database().ref('sessions/' + sessionName + "/data");
+var whole = firebase.database().ref('sessions/' + sessionName);
 jsonDataUpdate.on('value', function (snapshot) {
     globals.loadJSON(snapshot.val());
 });
+
+whole.on('value', function (snapshot) {
+    if (snapshot.val() == null) {
+        document.location.href = "session-ended.html";
+    }
+});
+
+// Ends current session
+function endSession() {
+    firebase.database().ref('sessions/' + sessionName).remove();
+    document.location.href = "session-ended.html";
+}

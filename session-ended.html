@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to Arboard</title>
+
+    <!-- Styling -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner" id="welcome">
+                <h1><span class="thin small">Your session has</span><br />ended</h1>
+                <input type="button" id="back-home" class="btn" value="Back Home" onclick="backHome()" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
