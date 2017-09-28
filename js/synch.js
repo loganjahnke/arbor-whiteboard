@@ -16,9 +16,6 @@ var isAnonymous = false;
 var downloadURL = "";
 var imageKeepName = "";
 
-var tsWidth = -1;
-var tsHeight = -1;
-
 // Called whenever authentication changes (sign in or out)
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -53,11 +50,17 @@ window.globals.saveJSON = function (json, width, height) {
             client: "present"
         });
     } else {
-        firebase.database().ref('sessions/' + sessionName).update({
-            data: json,
-            tsWidth: width,
-            tsHeight: height
-        });
+        if (globals.tsWidth == -1) {
+            firebase.database().ref('sessions/' + sessionName).update({
+                data: json,
+                tsWidth: width,
+                tsHeight: height
+            });
+        } else {
+            firebase.database().ref('sessions/' + sessionName).update({
+                data: json
+            });
+        }
     }
 }
 
@@ -74,44 +77,36 @@ jsonDataUpdate.on('value', function (snapshot) {
 
 // Everytime image is updated
 imageUpdate.on('value', function (snapshot) {
-    downloadURL = snapshot.val();
-    updateImage(downloadURL);
+    if (snapshot.val() == null) {
+        clearImage();
+    } else {
+        downloadURL = snapshot.val();
+        updateImage(downloadURL);
+    }
 });
 
 // Check for delete
 whole.on('value', function (snapshot) {
     if (snapshot.val() == null) {
         document.location.href = "session-ended.html";
-    } 
-    
-    if (snapshot.val().tsWidth != tsWidth && snapshot.val().tsHeight != tsHeight) {
-        tsWidth = snapshot.val().tsWidth;
-        tsHeight = snapshot.val().tsHeight;
-        if (isAnonymous) globals.scale(tsWidth, tsHeight);
+    }
+
+    if (snapshot.val().tsWidth != globals.tsWidth && snapshot.val().tsHeight != globals.tsHeight) {
+        globals.tsWidth = snapshot.val().tsWidth;
+        globals.tsHeight = snapshot.val().tsHeight;
+        globals.scale();
     }
 });
 
 // Ends current session
 function endSession() {
     firebase.database().ref('sessions/' + sessionName).remove();
-    deleteImage();
     document.location.href = "session-ended.html";
 }
 
 // Deletes image from storage
 function deleteImage() {
     firebase.database().ref('sessions/' + sessionName + "/image").remove();
-    if (imageKeepName != "" && imageKeepName != null) {
-        // Create a reference to the file to delete
-        var desertRef = storageRef.child('images/' + imageKeepName);
-
-        // Delete the file
-        desertRef.delete().then(function () {
-            console.log("file deleted");
-        }).catch(function (error) {
-            console.log("error: " + error);
-        });
-    }
 }
 
 // Search parameters to get session id

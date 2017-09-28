@@ -21,12 +21,14 @@ globals.loadJSON = function (json) {
 }
 
 // Rescales the paper.js view by the top-left corner Point(x: 0, y: 0)
-globals.scale = function (width, height) {
-    var w = parseInt(width);
-    var wt = parseInt(project.activeLayer.view.size.width);
-    var h = parseInt(height);
-    var ht = parseInt(project.activeLayer.view.size.height);
-    project.activeLayer.view.scale(wt / w, ht / h, new Point(0, 0));
+globals.scale = function () {
+    if (globals.tsWidth > 0 && globals.tsHeight > 0) {
+        var w = parseInt(globals.tsWidth);
+        var wt = parseInt(project.activeLayer.view.size.width);
+        var h = parseInt(globals.tsHeight);
+        var ht = parseInt(project.activeLayer.view.size.height);
+        project.activeLayer.view.scale(wt / w, ht / h, new Point(0, 0));
+    }
 }
 
 var path;
@@ -93,4 +95,8 @@ function onMouseUp(event) {
     path.simplify(10);
 
     globals.saveJSON(project.activeLayer.exportJSON(), project.view.size.width, project.view.size.height);
+}
+
+function onResize() {
+    globals.scale();
 }

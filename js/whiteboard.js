@@ -9,8 +9,8 @@ window.globals = {
     loadJSON: function (json) {},
     saveJSON: function (json) {},
     scale: function (width, height) {},
-    tsHeight: 0,
-    tsWidth: 0
+    tsHeight: -1,
+    tsWidth: -1
 }
 
 // Initialize non-paper.js stuff
