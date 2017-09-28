@@ -23,6 +23,7 @@ globals.loadJSON = function (json) {
 // Rescales the paper.js view by the top-left corner Point(x: 0, y: 0)
 globals.scale = function () {
     if (globals.tsWidth > 0 && globals.tsHeight > 0) {
+        console.log("update");
         var w = parseInt(globals.tsWidth);
         var wt = parseInt(project.activeLayer.view.size.width);
         var h = parseInt(globals.tsHeight);
@@ -94,7 +95,7 @@ function onMouseUp(event) {
     // When the mouse is released, simplify it:
     path.simplify(10);
 
-    globals.saveJSON(project.activeLayer.exportJSON(), project.view.size.width, project.view.size.height);
+    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height);
 }
 
 function onResize() {

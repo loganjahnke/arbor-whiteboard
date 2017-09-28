@@ -50,7 +50,7 @@ window.globals.saveJSON = function (json, width, height) {
             client: "present"
         });
     } else {
-        if (globals.tsWidth == -1) {
+        if (globals.tsWidth == null) {
             firebase.database().ref('sessions/' + sessionName).update({
                 data: json,
                 tsWidth: width,
