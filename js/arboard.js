@@ -1,7 +1,7 @@
 // Erases top layer (drawings, not image)
 globals.erase = function () {
     project.activeLayer.removeChildren();
-    globals.saveJSON(project.activeLayer.exportJSON());
+    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height);
 }
 
 // Changes stroke width of pen
@@ -18,6 +18,15 @@ globals.opacityChange = function (o) {
 globals.loadJSON = function (json) {
     project.activeLayer.removeChildren();
     project.activeLayer.importJSON(json);
+}
+
+// Rescales the paper.js view by the top-left corner Point(x: 0, y: 0)
+globals.scale = function (width, height) {
+    var w = parseInt(width);
+    var wt = parseInt(project.activeLayer.view.size.width);
+    var h = parseInt(height);
+    var ht = parseInt(project.activeLayer.view.size.height);
+    project.activeLayer.view.scale(wt / w, ht / h, new Point(0, 0));
 }
 
 var path;
@@ -83,5 +92,5 @@ function onMouseUp(event) {
     // When the mouse is released, simplify it:
     path.simplify(10);
 
-    globals.saveJSON(project.activeLayer.exportJSON());
+    globals.saveJSON(project.activeLayer.exportJSON(), project.view.size.width, project.view.size.height);
 }

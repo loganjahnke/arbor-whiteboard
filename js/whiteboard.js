@@ -7,7 +7,10 @@ window.globals = {
     strokeChange: function (s) {},
     opacityChange: function (o) {},
     loadJSON: function (json) {},
-    saveJSON: function (json) {}
+    saveJSON: function (json) {},
+    scale: function (width, height) {},
+    tsHeight: 0,
+    tsWidth: 0
 }
 
 // Initialize non-paper.js stuff
@@ -50,14 +53,20 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#curr-image')
-                .attr('src', e.target.result);
+            updateImage(e.target.result);
+            uploadImage(e.target.result, input.files[0]);
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
+function updateImage(link) {
+    if (link == "" || link == null) clearImage();
+    else $('#curr-image').attr('src', link);
+}
+
 // Removes image from screen
 function clearImage() {
+    deleteImage();
     $('#curr-image').attr('src', "images/white.gif");
 }

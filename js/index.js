@@ -13,12 +13,14 @@ var database = firebase.database();
 
 var authenticated = false;
 var isAnonymous = false;
+var createPlz = false;
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         isAnonymous = user.isAnonymous;
         console.log("Welcome " + user.email);
         authenticated = true;
+        if (createPlz) authenticate(isAnonymous);
     } else {
         console.log("Goodbye");
         authenticated = false;
@@ -30,7 +32,7 @@ function authenticate(anonymous) {
         if (anonymous) {
             joinSession($("#session-password").val());
         } else {
-            createSession(firebase.auth().currentUser.email);
+            createSession();
         }
     } else {
         if (anonymous) {
@@ -40,6 +42,7 @@ function authenticate(anonymous) {
                 console.log("Error signing in anonymously: " + errorCode + " -> " + errorMessage);
             });
         } else {
+            createPlz = true;
             var email = $("#login").val();
             var password = $("#password").val();
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
@@ -53,17 +56,19 @@ function authenticate(anonymous) {
     return false;
 }
 
-function createSession(email) {
+function createSession() {
     var sessionNumber;
-    if ($("#session").val() != null) {
+    if ($("#session").val() != "") {
         sessionNumber = $("#session").val();
+    } else if ($("#session2").val() != "") {
+        sessionNumber = $("#session2").val();
     } else {
         sessionNumber = randomSession();
     }
 
     firebase.database().ref('sessions/' + sessionNumber).set({
         active: true,
-        tutor: email
+        tutor: firebase.auth().currentUser.email
     }).then(function (json) {
         console.log("Successfully created session.");
         document.location.href = "arboard.html?session=" + sessionNumber;
@@ -90,6 +95,10 @@ function randomSession() {
 
 function showLogin() {
     if (authenticated && !isAnonymous) {
+        $("#login-form").css({
+            display: "none"
+        });
+
         $("#short-login-form").css({
             display: "block"
         });
@@ -98,6 +107,10 @@ function showLogin() {
             display: "none"
         });
     } else {
+        $("#short-login-form").css({
+            display: "none"
+        });
+
         $("#login-form").css({
             display: "block"
         });
