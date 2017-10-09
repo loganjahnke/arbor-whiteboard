@@ -4,6 +4,10 @@ globals.erase = function () {
     globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height);
 }
 
+globals.colorChange = function (jscolor) {
+    color = "#" + jscolor;
+}
+
 // Changes stroke width of pen
 globals.strokeChange = function (s) {
     stroke = s;
@@ -23,13 +27,23 @@ globals.loadJSON = function (json) {
 // Rescales the paper.js view by the top-left corner Point(x: 0, y: 0)
 globals.scale = function () {
     if (globals.tsWidth > 0 && globals.tsHeight > 0) {
-        console.log("update");
         var w = parseInt(globals.tsWidth);
         var wt = parseInt(project.activeLayer.view.size.width);
         var h = parseInt(globals.tsHeight);
         var ht = parseInt(project.activeLayer.view.size.height);
         project.activeLayer.view.scale(wt / w, ht / h, new Point(0, 0));
+        globals.updateImageScale(wt / w, ht / h);
     }
+}
+
+globals.requestSave = function () {
+    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height);
+}
+
+// Removes last drawn object
+globals.undo = function () {
+    var removed = project.activeLayer.lastChild.remove();
+    if (removed) globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height);
 }
 
 var path;
@@ -37,27 +51,27 @@ var color = "black";
 var stroke = 2;
 var opacity = 1;
 
-var colorNames = ["black", "red", "yellow", "green", "blue", "purple"];
-var colors = [];
-var colorSize = 40;
+// var colorNames = ["black", "red", "yellow", "green", "blue", "purple"];
+// var colors = [];
+// var colorSize = 40;
 
-var uiLayer = project.activeLayer;
+// var uiLayer = project.activeLayer;
 
 // Initialize color choices for pen in uiLayer
-for (var i = 1; i <= colorNames.length; i++) {
-    var rect = new Rectangle({
-        x: view.size.width - i * colorSize * 1.2 - 10,
-        y: colorSize / 2,
-        width: colorSize,
-        height: colorSize
-    });
+// for (var i = 1; i <= colorNames.length; i++) {
+//     var rect = new Rectangle({
+//         x: i * colorSize * 1.2 - 10,
+//         y: colorSize / 2,
+//         width: colorSize,
+//         height: colorSize
+//     });
 
-    var shape = Shape.Rectangle(rect);
-    shape.strokeColor = "black";
-    shape.fillColor = colorNames[i - 1];
+//     var shape = Shape.Rectangle(rect);
+//     shape.strokeColor = "black";
+//     shape.fillColor = colorNames[i - 1];
 
-    colors.push(shape);
-}
+//     colors.push(shape);
+// }
 
 
 
@@ -67,11 +81,11 @@ var drawingLayer = new Layer();
 // On all mouse and touch down events create a new path
 function onMouseDown(event) {
     // Change color if pointing at color
-    for (var i = 0; i < colors.length; i++) {
-        if (colors[i].contains(event.point)) {
-            color = colorNames[i];
-        }
-    }
+    // for (var i = 0; i < colors.length; i++) {
+    //     if (colors[i].contains(event.point)) {
+    //         color = colorNames[i];
+    //     }
+    // }
 
     // Create a new path and set its stroke color to color choice
     path = new Path({

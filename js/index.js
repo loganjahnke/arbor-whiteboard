@@ -48,6 +48,7 @@ function authenticate(anonymous) {
             firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                alert("Error signing in. Check password.");
                 console.log("Error signing in: " + errorCode + " -> " + errorMessage);
             });
         }
@@ -59,9 +60,9 @@ function authenticate(anonymous) {
 function createSession() {
     var sessionNumber;
     if ($("#session").val() != "") {
-        sessionNumber = $("#session").val();
+        sessionNumber = $("#session").val().replace(/\s+/g, '-');
     } else if ($("#session2").val() != "") {
-        sessionNumber = $("#session2").val();
+        sessionNumber = $("#session2").val().replace(/\s+/g, '-');
     } else {
         sessionNumber = randomSession();
     }
@@ -78,9 +79,9 @@ function createSession() {
 }
 
 function joinSession(sessionPassword) {
-    firebase.database().ref('sessions/' + sessionPassword).once('value').then(function (snapshot) {
+    firebase.database().ref('sessions/' + sessionPassword.replace(/\s+/g, '-')).once('value').then(function (snapshot) {
         if (snapshot.val()) {
-            document.location.href = "arboard.html?session=" + sessionPassword;
+            document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
         } else {
             alert("Invalid password.");
         }
@@ -94,6 +95,8 @@ function randomSession() {
 }
 
 function showLogin() {
+    firebase.auth().signOut();
+    authenticated = false;
     if (authenticated && !isAnonymous) {
         $("#login-form").css({
             display: "none"

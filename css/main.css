@@ -2,6 +2,7 @@ body {
     font-family: 'Lato';
     background-color: #4BC6FF;
     color: #042A2B;
+    -webkit-appearance: none;
 }
 
 h1 {
@@ -46,6 +47,7 @@ h1 {
 }
 
 #login,
+#email,
 #password,
 #session,
 #session2,
@@ -112,28 +114,39 @@ input:focus {
     background-color: white;
 }
 
+#color-picker {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    text-align: right;
+}
+
+.jscolor {
+    text-align: center;
+}
+
 #stroke-desc {
     position: absolute;
-    top: 85px;
+    top: 55px;
     right: 250px;
 }
 
 #stroke {
     position: absolute;
-    top: 105px;
+    top: 75px;
     right: 55px;
     width: 165px;
 }
 
 #opacity-desc {
     position: absolute;
-    top: 115px;
+    top: 85px;
     right: 250px;
 }
 
 #opacity {
     position: absolute;
-    top: 135px;
+    top: 105px;
     right: 55px;
     width: 165px;
 }
@@ -156,6 +169,14 @@ input {
     bottom: 60px;
 }
 
+#undo {
+    font-size: 18px;
+    width: 165px;
+    position: absolute;
+    right: 55px;
+    bottom: 120px;
+}
+
 #clr {
     font-size: 18px;
     width: 165px;
@@ -176,7 +197,7 @@ input {
     text-align: right;
     position: absolute;
     right: 55px;
-    bottom: 110px;
+    bottom: 140px;
 }
 
 #end-session {
@@ -185,4 +206,12 @@ input {
     position: absolute;
     left: 55px;
     bottom: 30px;
+}
+
+#curr-image {
+    height: 85%;
+    width: 45%;
+    position: absolute;
+    top: 2%;
+    left: 2%;
 }

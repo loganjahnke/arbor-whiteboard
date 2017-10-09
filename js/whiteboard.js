@@ -4,11 +4,15 @@ var imageLoader;
 // PaperScript Interop
 window.globals = {
     erase: function () {},
+    undo: function () {},
+    colorChange: function (jsColor) {},
     strokeChange: function (s) {},
     opacityChange: function (o) {},
     loadJSON: function (json) {},
     saveJSON: function (json) {},
-    scale: function (width, height) {},
+    scale: function () {},
+    updateImageScale: function () {},
+    requestSave: function () {},
     tsHeight: -1,
     tsWidth: -1
 }
@@ -24,6 +28,7 @@ function init() {
     h = canvas.height;
 
     $("#clr").click(window.globals.erase);
+    $("#undo").click(window.globals.undo);
 
     $("#stroke").slider({
         min: 0.5,
@@ -55,6 +60,7 @@ function readURL(input) {
         reader.onload = function (e) {
             updateImage(e.target.result);
             uploadImage(e.target.result, input.files[0]);
+            window.globals.requestSave();
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -63,6 +69,13 @@ function readURL(input) {
 function updateImage(link) {
     if (link == "" || link == null) clearImage();
     else $('#curr-image').attr('src', link);
+}
+
+function updateImageScale(w, h) {
+    $('#curr-image').css({
+        height: (85 * h) + "%",
+        width: (45 * w) + "%"
+    })
 }
 
 // Removes image from screen

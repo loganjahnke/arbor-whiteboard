@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to Arboard</title>
+
+    <!-- Styling -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/register.js"></script>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner" id="welcome">
+                <form method="post" onsubmit="return register()">
+                    <h1>
+                        <span class="thin small">Welcome to</span>
+                        <br />Arboard
+                    </h1>
+                    <p>Register with your Arbor Gmail account</p>
+                    <input type="email" id="email" placeholder="Email Address" name="email">
+                    <br />
+                    <input type="password" id="password" name="password" placeholder="Password">
+                    <br />
+                    <br />
+                    <input class="btn" type="submit" id="dologin" value="Register">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

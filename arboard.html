@@ -20,16 +20,19 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/paper-full.min.js"></script>
+	<script type="text/javascript" src="js/jscolor.min.js"></script>
 	<script type="text/javascript" src="js/whiteboard.js"></script>
 	<script type="text/javascript" src="js/synch.js"></script>
 	<script type="text/paperscript" src="js/arboard.js" canvas="can"></script>
 </head>
 
 <body onload="init()" class="lock-screen">
-	<img id="curr-image" src="images/white.gif" style="width:50%;height:50%;position:absolute;bottom:25%;left:25%;" />
+	<img id="curr-image" src="images/white.gif" />
 	<canvas id="can" resize></canvas>
+	<div id="color-picker">Pen Color: <input class="jscolor" value="000000" onchange="window.globals.colorChange(this.jscolor)"></div>
 	<p id="client-password">Client Password: N/A</p>
 	<input type="file" id="file-getter" size="33" onchange="readURL(this);">
+	<input type="button" value="Undo" id="undo" size="33">
 	<input type="button" value="Clear" id="clr" size="33">
 	<input type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
 	<input type="button" value="End Session" id="end-session" onclick="endSession();" size="33">
