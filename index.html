@@ -27,7 +27,9 @@
 	<div class="outer">
 		<div class="middle">
 			<div class="inner" id="welcome">
-				<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+				<h1>
+					<span class="thin small">Welcome to</span>
+					<br />Arboard</h1>
 				<input type="button" id="create-session" class="btn" value="Create Session" onclick="showLogin()" />
 				<input type="button" id="join-session" class="btn" value="Join Session" onclick="showJoin()" />
 			</div>
@@ -35,46 +37,60 @@
 			<!--ALREADY AUTHENTICATED CREATION FORM-->
 			<div class="inner" id="short-login-form">
 				<form method="post" onsubmit="return authenticate(false)">
-					<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+					<h1>
+						<span class="thin small">Welcome to</span>
+						<br />Arboard</h1>
 					<p>Create a session - you are already signed in</p>
 					<input type="text" id="session" name="session" placeholder="Session Name (optional)">
-					<br /><br />
+					<br />
+					<br />
 					<input class="btn" type="submit" id="doshortlogin" value="Create Session">
-					<input class="btn back" type="submit" value="Back" onclick="document.location.href='index.html';">
+					<input class="btn back" type="button" value="Back" onclick="document.location.href='index.html';">
 				</form>
 			</div>
 
 			<!--LOGIN FORM-->
 			<div class="inner" id="login-form">
 				<form method="post" onsubmit="return authenticate(false)">
-					<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+					<h1>
+						<span class="thin small">Welcome to</span>
+						<br />Arboard</h1>
 					<p>Sign in to create a session</p>
 					<input type="text" id="login" placeholder="Email Address" name="email">
 					<br />
 					<input type="password" id="password" name="password" placeholder="Password">
 					<br />
 					<input type="text" id="session2" name="session" placeholder="Session Name (optional)">
-					<br /><br />
+					<br />
+					<br />
 					<input class="btn" type="submit" id="dologin" value="Create Session">
-					<input class="btn back" type="submit" value="Back" onclick="document.location.href='index.html';">
-					<input class="btn" type="button" id="reset" value="Forgot Password?" onclick="document.location.href='reset-password.html';" />
+					<input class="btn back" type="button" value="Back" onclick="document.location.href='index.html';">
+					<input class="btn" type="button" id="reset" value="Forgot Password?" onclick="document.location.href='reset-password.html';"
+					/>
 				</form>
 			</div>
 
 			<!--JOIN FORM-->
 			<div class="inner" id="join-form">
 				<form method="post" onsubmit="return authenticate(true)">
-					<h1><span class="thin small">Welcome to</span><br />Arboard</h1>
+					<h1>
+						<span class="thin small">Welcome to</span>
+						<br />Arboard</h1>
 					<p>Enter password to join a session</p>
 					<input type="text" id="session-password" placeholder="Session Password" name="session-password">
-					<br /><br />
+					<br />
+					<br />
 					<input class="btn" type="submit" id="dojoin" value="Join Session">
-					<input class="btn back" type="submit" value="Back" onclick="document.location.href='index.html';">
+					<input class="btn back" type="button" value="Back" onclick="document.location.href='index.html';">
 				</form>
 			</div>
-			
+
 		</div>
 	</div>
+	<div id="footer">
+
+	</div>
+	<img id="logo" src="images/arbor-tutors.png" />
 </body>
 
 </html>

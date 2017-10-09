@@ -38,6 +38,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         user = null;
         console.log("Goodbye");
         authenticated = false;
+        document.location.href = "session-ended.html";
     }
 });
 

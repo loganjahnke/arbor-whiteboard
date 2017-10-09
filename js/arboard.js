@@ -5,7 +5,7 @@ globals.erase = function () {
 }
 
 globals.colorChange = function (jscolor) {
-    color = "#" + jscolor;
+    color = jscolor.toHEXString();
 }
 
 // Changes stroke width of pen

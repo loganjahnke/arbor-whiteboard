@@ -5,6 +5,7 @@
 	<title>Arboard</title>
 
 	<!-- Styling -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -28,14 +29,22 @@
 
 <body onload="init()" class="lock-screen">
 	<img id="curr-image" src="images/white.gif" />
+	<img id="logo" src="images/arbor-tutors.png" />
 	<canvas id="can" resize></canvas>
-	<div id="color-picker">Pen Color: <input class="jscolor" value="000000" onchange="window.globals.colorChange(this.jscolor)"></div>
+	<div id="color-picker">Pen Color:
+		<input id="cp" class="jscolor {
+			valueElement: null,
+			value: '000000',
+			closable: true,
+			closeText: 'Close',
+			onFineChange: 'window.globals.colorChange(this);'
+		}" />
+	</div>
 	<p id="client-password">Client Password: N/A</p>
-	<input type="file" id="file-getter" size="33" onchange="readURL(this);">
-	<input type="button" value="Undo" id="undo" size="33">
-	<input type="button" value="Clear" id="clr" size="33">
-	<input type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
-	<input type="button" value="End Session" id="end-session" onclick="endSession();" size="33">
+	<input type="file" id="file-getter" size="60" onchange="readURL(this);">
+	<input class="small-btn" type="button" value="Undo" id="undo" size="33">
+	<input class="small-btn" type="button" value="Clear" id="clr" size="33">
+	<input class="small-btn" type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
 
 	<p id="stroke-desc">Stroke</p>
 	<div id="stroke"></div>

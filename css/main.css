@@ -1,8 +1,7 @@
 body {
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif;
     background-color: #4BC6FF;
     color: #042A2B;
-    -webkit-appearance: none;
 }
 
 h1 {
@@ -76,6 +75,26 @@ input:focus {
     outline: none;
     text-decoration: none;
     color: #FFFFFF;
+    -webkit-appearance: none;
+}
+
+.small-btn {
+    border-radius: 10px;
+    display: inline-block;
+    background: #2C4251;
+    border: 0;
+    line-height: 15%;
+    padding: 1%;
+    outline: none;
+    text-decoration: none;
+    color: #FFFFFF;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.small-btn:hover {
+    cursor: pointer;
+    font-weight: 900;
 }
 
 .btn:hover {
@@ -88,6 +107,7 @@ input:focus {
     margin-bottom: 1em;
     outline: none;
     text-decoration: none;
+    -webkit-appearance: none;
 }
 
 #join-session,
@@ -159,53 +179,48 @@ input:focus {
 
 input {
     font-family: 'Lato';
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 #file-getter {
-    font-size: 18px;
-    width: 165px;
+    font-size: 22px;
+    color: transparent;
+    width: 8%;
     position: absolute;
-    right: 55px;
-    bottom: 60px;
+    right: 5%;
+    bottom: 9.5%;
 }
 
 #undo {
     font-size: 18px;
-    width: 165px;
+    width: 12%;
     position: absolute;
-    right: 55px;
-    bottom: 120px;
+    right: 16%;
+    bottom: 3%;
 }
 
 #clr {
     font-size: 18px;
-    width: 165px;
+    width: 12%;
     position: absolute;
-    right: 55px;
-    bottom: 90px;
+    right: 29%;
+    bottom: 3%;
 }
 
 #clr-img {
     font-size: 18px;
-    width: 165px;
+    width: 12%;
     position: absolute;
-    right: 55px;
-    bottom: 30px;
+    right: 3%;
+    bottom: 3%;
 }
 
 #client-password {
     text-align: right;
     position: absolute;
-    right: 55px;
-    bottom: 140px;
-}
-
-#end-session {
-    font-size: 18px;
-    width: 165px;
-    position: absolute;
-    left: 55px;
-    bottom: 30px;
+    right: 15%;
+    bottom: 8.5%;
 }
 
 #curr-image {
@@ -214,4 +229,22 @@ input {
     position: absolute;
     top: 2%;
     left: 2%;
+}
+
+#logo {
+    height: 5%;
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    z-index: 100;
+}
+
+#footer {
+    background: #2C4251;
+    position: absolute;
+    bottom: -5%;
+    left: 0%;
+    height: 15%;
+    width: 100%;
+    z-index: -50;
 }
