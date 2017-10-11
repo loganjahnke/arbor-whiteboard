@@ -43,7 +43,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 // Saves paper.js data
-window.globals.saveJSON = function (json, width, height) {
+window.globals.saveJSON = function (json, width, height, tpw, tph) {
     var sessionName = searchParams("session", window.location.search);
     if (ourUser.isAnonymous) {
         firebase.database().ref('sessions/' + sessionName).update({
@@ -51,15 +51,21 @@ window.globals.saveJSON = function (json, width, height) {
             client: "present"
         });
     } else {
+        if (tpw == null) tpw = -1;
+        if (tph == null) tph = -1;
         if (globals.tsWidth == null) {
             firebase.database().ref('sessions/' + sessionName).update({
                 data: json,
                 tsWidth: width,
-                tsHeight: height
+                tsHeight: height,
+                tpWidth: tpw,
+                tpHeight: tph
             });
         } else {
             firebase.database().ref('sessions/' + sessionName).update({
-                data: json
+                data: json,
+                tpWidth: tpw,
+                tpHeight: tph
             });
         }
     }
@@ -78,6 +84,7 @@ jsonDataUpdate.on('value', function (snapshot) {
 
 // Everytime image is updated
 imageUpdate.on('value', function (snapshot) {
+    console.log("Image uploaded!");
     if (snapshot.val() == null) {
         clearImage();
     } else {
@@ -88,6 +95,7 @@ imageUpdate.on('value', function (snapshot) {
 
 // Check for delete
 whole.on('value', function (snapshot) {
+    console.log("Whole update");
     if (snapshot.val() == null) {
         document.location.href = "session-ended.html";
     }
@@ -95,6 +103,12 @@ whole.on('value', function (snapshot) {
     if (snapshot.val().tsWidth != globals.tsWidth && snapshot.val().tsHeight != globals.tsHeight) {
         globals.tsWidth = snapshot.val().tsWidth;
         globals.tsHeight = snapshot.val().tsHeight;
+        globals.scale();
+    }
+
+    if (snapshot.val().tpWidth != globals.tpWidth && snapshot.val().tpHeight != globals.tpHeight) {
+        globals.tpWidth = snapshot.val().tpWidth;
+        globals.tpHeight = snapshot.val().tpHeight;
         globals.scale();
     }
 });
@@ -106,6 +120,7 @@ function endSession() {
 }
 
 // Deletes image from storage
+
 function deleteImage() {
     firebase.database().ref('sessions/' + sessionName + "/image").remove();
 }
@@ -169,6 +184,8 @@ function uploadImage(imageName, image) {
     }, function () {
         // Upload completed successfully, now we can get the download URL
         downloadURL = uploadTask.snapshot.downloadURL;
+        globals.uploaded = true;
+        updateImage(downloadURL);
         firebase.database().ref('sessions/' + sessionName).update({
             image: downloadURL
         });

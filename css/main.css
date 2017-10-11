@@ -230,8 +230,8 @@ input {
 }
 
 #curr-image {
-    height: 85%;
-    width: 45%;
+    /* height: 85%;
+    width: 45%; */
     position: absolute;
     top: 2%;
     left: 2%;

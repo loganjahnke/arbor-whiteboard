@@ -1,6 +1,11 @@
 var canvas, ctx, w, h; // NOTE: probably not needed anymore, keep here til certain
 var imageLoader;
 
+var ih = 85;
+var iw = 45;
+
+var defaultSize = 0.75;
+
 // PaperScript Interop
 window.globals = {
     erase: function () {},
@@ -14,7 +19,10 @@ window.globals = {
     updateImageScale: function () {},
     requestSave: function () {},
     tsHeight: -1,
-    tsWidth: -1
+    tsWidth: -1,
+    tpHeight: -1,
+    tpWidth: -1,
+    uploaded: false
 }
 
 // Initialize non-paper.js stuff
@@ -48,28 +56,74 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            updateImage(e.target.result);
             uploadImage(e.target.result, input.files[0]);
-            window.globals.requestSave();
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
 function updateImage(link) {
+    if (globals.uploaded) {
+        var img = new Image();
+        img.onload = function () {
+            var height = img.height;
+            var width = img.width;
+
+            var sheight = screen.height;
+            var swidth = screen.width;
+
+            // Accounting for phone and iPad orientation
+            if (sheight > swidth) {
+                var t = sheight;
+                sheight = swidth;
+                swidth = t;
+            }
+
+            if (height > width) {
+                ih = defaultSize; // 75% of screen for image height
+                var newH = (ih * sheight);
+                iw = (newH / height * width) / swidth;
+                while (iw > 1.0) {
+                    ih -= 0.02;
+                    newH = (ih * sheight);
+                    iw = (newH / height * width) / swidth;
+                }
+            } else {
+                iw = defaultSize; // 75% of screen for image width
+                var newW = (iw * swidth);
+                ih = (newW / width * height) / sheight;
+                while (ih > 1.0) {
+                    iw -= 0.02;
+                    newW = (iw * swidth);
+                    ih = (newW / width * height) / sheight;
+                }
+            }
+            ih *= 100;
+            iw *= 100;
+            globals.tpHeight = ih;
+            globals.tpWidth = iw;
+            globals.uploaded = false;
+            window.globals.requestSave();
+            window.globals.scale();
+        }
+        img.src = link;
+    }
+
     if (link == "" || link == null) clearImage();
     else $('#curr-image').attr('src', link);
 }
 
-function updateImageScale(w, h) {
+globals.updateImageScale = function (w, h) {
     $('#curr-image').css({
-        height: (85 * h) + "%",
-        width: (45 * w) + "%"
-    })
+        height: (h * globals.tpHeight) + "%",
+        width: (w * globals.tpWidth) + "%"
+    });
 }
 
 // Removes image from screen
 function clearImage() {
     deleteImage();
     $('#curr-image').attr('src', "images/white.gif");
+    globals.tpHeight = -1;
+    globals.tpWidth = -1;
 }
