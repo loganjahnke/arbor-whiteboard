@@ -46,11 +46,19 @@
 	<input class="small-btn" type="button" value="Clear" id="clr" size="33">
 	<input class="small-btn" type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
 
-	<p id="stroke-desc">Stroke</p>
-	<div id="stroke"></div>
+	<label for="stroke" id="stroke-desc">Stroke</label>
+	<select name="stroke" id="stroke">
+		<option value="1" selected>Thin</option>
+		<option value="10" selected>Medium</option>
+		<option value="50">Thick</option>
+		<option value="300">Mega Ultra Thick</option>
+	</select>
 
-	<p id="opacity-desc">Opacity</p>
-	<div id="opacity"></div>
+	<label for="opacity" id="opacity-desc">Opacity</label>
+	<select name="opacity" id="opacity">
+		<option value="1.0" selected>Pen</option>
+		<option value="0.3">Highlighter</option>
+	</select>
 </body>
 
 </html>

@@ -58,18 +58,18 @@ function authenticate(anonymous) {
 }
 
 function createSession() {
-    var sessionNumber;
-    if ($("#session").val() != "") {
-        sessionNumber = $("#session").val().replace(/\s+/g, '-');
-    } else if ($("#session2").val() != "") {
-        sessionNumber = $("#session2").val().replace(/\s+/g, '-');
-    } else {
-        sessionNumber = randomSession();
-    }
-
+    var sessionNumber = randomSession();
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":" +
+        currentdate.getSeconds();
     firebase.database().ref('sessions/' + sessionNumber).set({
         active: true,
-        tutor: firebase.auth().currentUser.email
+        tutor: firebase.auth().currentUser.email,
+        dateCreated: datetime
     }).then(function (json) {
         console.log("Successfully created session.");
         document.location.href = "arboard.html?session=" + sessionNumber;

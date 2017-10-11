@@ -146,29 +146,35 @@ input:focus {
 }
 
 #stroke-desc {
+    text-align: center;
     position: absolute;
-    top: 55px;
-    right: 250px;
+    top: 10%;
+    right: 8.5%;
+    z-index: 100;
 }
 
-#stroke {
+#stroke-button {
     position: absolute;
-    top: 75px;
-    right: 55px;
-    width: 165px;
+    top: 12%;
+    right: 3%;
+    width: 12%;
+    z-index: 1;
 }
 
 #opacity-desc {
+    text-align: center;
     position: absolute;
-    top: 85px;
-    right: 250px;
+    top: 17%;
+    right: 8.5%;
+    z-index: 100;
 }
 
-#opacity {
+#opacity-button {
     position: absolute;
-    top: 105px;
-    right: 55px;
-    width: 165px;
+    top: 19%;
+    right: 3%;
+    width: 12%;
+    z-index: 1;
 }
 
 #login-form,

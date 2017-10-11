@@ -30,25 +30,15 @@ function init() {
     $("#clr").click(window.globals.erase);
     $("#undo").click(window.globals.undo);
 
-    $("#stroke").slider({
-        min: 0.5,
-        max: 50,
-        step: 0.5,
-        value: 2,
-        animate: "fast",
+    $("#stroke").selectmenu({
         change: function () {
-            window.globals.strokeChange($("#stroke").slider("value"));
+            window.globals.strokeChange($("#stroke").val());
         }
     });
 
-    $("#opacity").slider({
-        min: 0,
-        max: 1,
-        value: 1,
-        step: 0.01,
-        animate: "fast",
+    $("#opacity").selectmenu({
         change: function () {
-            window.globals.opacityChange($("#opacity").slider("value"));
+            window.globals.opacityChange($("#opacity").val());
         }
     });
 }
