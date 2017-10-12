@@ -31,7 +31,7 @@
 	<img id="curr-image" src="images/white.gif" />
 	<img id="logo" src="images/arbor-tutors.png" />
 	<canvas id="can" resize></canvas>
-	<div id="color-picker">Pen Color:
+	<div id="color-picker">Color:
 		<input id="cp" class="jscolor {
 			valueElement: null,
 			value: '000000',
@@ -46,15 +46,14 @@
 	<input class="small-btn" type="button" value="Clear" id="clr" size="33">
 	<input class="small-btn" type="button" value="Clear Image" id="clr-img" onclick="clearImage();" size="33">
 
-	<label for="stroke" id="stroke-desc">Stroke</label>
+	<label for="stroke" id="stroke-desc">Thickness</label>
 	<select name="stroke" id="stroke">
 		<option value="1" selected>Thin</option>
 		<option value="10" selected>Medium</option>
 		<option value="50">Thick</option>
-		<option value="300">Mega Ultra Thick</option>
 	</select>
 
-	<label for="opacity" id="opacity-desc">Opacity</label>
+	<label for="opacity" id="opacity-desc">Tool</label>
 	<select name="opacity" id="opacity">
 		<option value="1.0" selected>Pen</option>
 		<option value="0.3">Highlighter</option>
