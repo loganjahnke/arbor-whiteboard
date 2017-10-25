@@ -1,11 +1,21 @@
 // Erases top layer (drawings, not image)
 globals.erase = function () {
+    prevJSON = project.activeLayer.exportJSON();
+    clearedLast = true;
     project.activeLayer.removeChildren();
-    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height, globals.tpWidth, globals.tpHeight);
+    globals.requestSave();
 }
 
+// Changes the color of the pen from the jscolor picker
+// www.jscolor.com
 globals.colorChange = function (jscolor) {
-    color = jscolor.toHEXString();
+    if (opacity > 0) {
+        prevColor = jscolor.toHEXString();
+        color = jscolor.toHEXString();
+    } else {
+        jscolor.fromString('#ffffff');
+        color = '#FFFFFF';
+    }
 }
 
 // Changes stroke width of pen
@@ -13,13 +23,24 @@ globals.strokeChange = function (s) {
     stroke = s;
 }
 
-// Change opacity of pen
+// Change opacity of pen,
+// changes color to white if eraser is chosen
 globals.opacityChange = function (o) {
-    opacity = o;
+    if (o > 0) {
+        opacity = o;
+        color = prevColor;
+        globals.eraserToggle(color);
+    } else {
+        opacity = o;
+        prevColor = color;
+        color = '#FFFFFF';
+        globals.eraserToggle(color);
+    }
 }
 
 // Loads database JSON into paper.js
-globals.loadJSON = function (json) {
+globals.loadJSON = function (json, cleared) {
+    clearedLast = cleared;
     project.activeLayer.removeChildren();
     project.activeLayer.importJSON(json);
 }
@@ -36,19 +57,38 @@ globals.scale = function () {
     }
 }
 
+// Shorthand for saving into Firebase
 globals.requestSave = function () {
-    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height, globals.tpWidth, globals.tpHeight);
+    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height, globals.tpWidth, globals.tpHeight, clearedLast);
 }
 
 // Removes last drawn object
 globals.undo = function () {
-    var removed = project.activeLayer.lastChild.remove();
-    if (removed) globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height, globals.tpWidth, globals.tpHeight);
+    undos.unshift(project.activeLayer.exportJSON());
+    if (clearedLast) {
+        clearedLast = false;
+        project.activeLayer.importJSON(prevJSON);
+        globals.requestSave();
+    } else {
+        var removed = project.activeLayer.lastChild.remove();
+        if (removed) globals.requestSave();
+    }
+}
+
+// Redraws last undo
+globals.redo = function () {
+    if (undos.length > 0) {
+        var json = undos.shift();
+        project.activeLayer.importJSON(json);
+        globals.requestSave();
+    }
 }
 
 var path;
-var color = "black";
-var stroke = 2;
+var color = "#000000";
+var prevColor, prevJSON, clearedLast = false,
+    undos = [];
+var stroke = 10;
 var opacity = 1;
 
 // Color choices are done, drawing layer is now active
@@ -78,9 +118,11 @@ function onMouseUp(event) {
     // When the mouse is released, simplify it:
     path.simplify(10);
 
-    globals.saveJSON(project.activeLayer.exportJSON(), project.activeLayer.view.size.width, project.activeLayer.view.size.height, globals.tpWidth, globals.tpHeight);
+    clearedLast = false;
+    globals.requestSave();
 }
 
+// Rescale on resize
 function onResize() {
     globals.scale();
 }

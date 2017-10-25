@@ -48,6 +48,7 @@ h1 {
 #login,
 #email,
 #password,
+#admin-password,
 #session,
 #session2,
 #session-password {
@@ -198,7 +199,7 @@ input {
     bottom: 9.5%;
 }
 
-#undo {
+#redo {
     font-size: 18px;
     width: 12%;
     position: absolute;
@@ -206,11 +207,27 @@ input {
     bottom: 3%;
 }
 
-#clr {
+#invite {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 55%;
+    bottom: 3%;
+}
+
+#undo {
     font-size: 18px;
     width: 12%;
     position: absolute;
     right: 29%;
+    bottom: 3%;
+}
+
+#clr {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 42%;
     bottom: 3%;
 }
 
@@ -220,13 +237,6 @@ input {
     position: absolute;
     right: 3%;
     bottom: 3%;
-}
-
-#client-password {
-    text-align: right;
-    position: absolute;
-    right: 15%;
-    bottom: 8.5%;
 }
 
 #curr-image {

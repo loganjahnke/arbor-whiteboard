@@ -79,19 +79,29 @@ function createSession() {
 }
 
 function joinSession(sessionPassword) {
-    firebase.database().ref('sessions/' + sessionPassword.replace(/\s+/g, '-')).once('value').then(function (snapshot) {
-        if (snapshot.val()) {
-            document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
-        } else {
-            alert("Invalid password.");
-        }
-    }).catch(function (error) {
-        alert("Error: " + error);
-    });
+    if (sessionPassword == "demo") {
+        document.location.href = "arboard.html?session=demo";
+    } else {
+        firebase.database().ref('sessions/' + sessionPassword.replace(/\s+/g, '-')).once('value').then(function (snapshot) {
+            if (snapshot.val()) {
+                document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
+            } else {
+                alert("Invalid password.");
+            }
+        }).catch(function (error) {
+            alert("Error: " + error);
+        });
+    }
 }
 
 function randomSession() {
-    return Math.floor(Math.random() * 16777215).toString(16) + "-" + Math.floor(Math.random() * 16777215).toString(16);
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 6; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }
 
 function showLogin() {

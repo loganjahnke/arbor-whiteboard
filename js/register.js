@@ -11,13 +11,14 @@ var app = firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        document.location.href = "index.html";
+        // document.location.href = "index.html";
     }
 });
 
 function register() {
     var email = $('#email').val();
     var password = $('#password').val();
+    var admin_password = $('#admin-password').val();
 
     if (!validateEmail(email)) {
         alert("Invalid email address.");
@@ -29,8 +30,14 @@ function register() {
         return false;
     }
 
+    if (admin_password != "ArBoard2018?") {
+        alert("Invalid administrator password.");
+        return false;
+    }
+
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-        document.location.href = "index.html";
+        alert("Successfully made new account with email: " + email);
+        document.location.href = "register.html";
     }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;

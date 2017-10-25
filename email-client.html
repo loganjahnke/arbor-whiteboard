@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Register with ArBoard</title>
+    <title>Welcome to ArBoard</title>
 
     <!-- Styling -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
@@ -13,39 +13,38 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="js/email-client.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <div class="outer">
         <div class="middle">
+            <!--EMAIL FORM-->
             <div class="inner" id="welcome">
-                <form method="post" onsubmit="return register()">
+                <form name="contact-form" method="post" action="php/email-client.php">
                     <h1>
-                        <span class="thin small">Welcome to</span>
-                        <br />ArBoard
-                    </h1>
-                    <p>Register with your Arbor Gmail account</p>
-                    <input type="email" id="email" placeholder="Tutor Email Address" name="email">
+                        <span class="thin small">Email session to</span>
+                        <br />Client</h1>
+                    <input type="email" id="email" name="email" placeholder="Client Email">
                     <br />
-                    <input type="password" id="password" name="password" placeholder="Tutor Password">
-                    <br />
-                    <input type="password" id="admin-password" name="admin-password" placeholder="Admin Password">
+                    <input type="text" id="session" name="session" placeholder="Session Name">
                     <br />
                     <br />
-                    <input class="btn" type="submit" id="dologin" value="Register">
+                    <input class="btn" type="submit" id="doshortlogin" value="Email Client">
                 </form>
             </div>
 
         </div>
     </div>
-	<div id="footer"></div>
-	<img id="logo" src="images/arbor-tutors.png" />
+    <div id="footer"></div>
+    <img id="logo" src="images/arbor-tutors.png" />
 </body>
 
 </html>

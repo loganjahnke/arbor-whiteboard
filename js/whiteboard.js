@@ -4,6 +4,7 @@ var imageLoader;
 var ih = 85;
 var iw = 45;
 
+// Default image size
 var defaultSize = 0.75;
 
 // PaperScript Interop
@@ -18,6 +19,7 @@ window.globals = {
     scale: function () {},
     updateImageScale: function () {},
     requestSave: function () {},
+    eraserToggle: function () {},
     tsHeight: -1,
     tsWidth: -1,
     tpHeight: -1,
@@ -37,6 +39,10 @@ function init() {
 
     $("#clr").click(window.globals.erase);
     $("#undo").click(window.globals.undo);
+    $("#redo").click(window.globals.redo);
+    $("#invite").click(function () {
+        openInNewTab("http://arbortutors.net/arboard/email-client.html?session=" + searchParams("session", window.location.search));
+    });
 
     $("#stroke").selectmenu({
         change: function () {
@@ -51,6 +57,11 @@ function init() {
     });
 }
 
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+
 // Image reading
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -62,6 +73,7 @@ function readURL(input) {
     }
 }
 
+// Updates the image in Firebase and sets the scale
 function updateImage(link) {
     if (globals.uploaded) {
         var img = new Image();
@@ -113,6 +125,7 @@ function updateImage(link) {
     else $('#curr-image').attr('src', link);
 }
 
+// Updates the image scale
 globals.updateImageScale = function (w, h) {
     $('#curr-image').css({
         height: (h * globals.tpHeight) + "%",
@@ -126,4 +139,18 @@ function clearImage() {
     $('#curr-image').attr('src', "images/white.gif");
     globals.tpHeight = -1;
     globals.tpWidth = -1;
+    try {
+        document.getElementById('file-getter').value = '';
+        if (document.getElementById('file-getter').value) {
+            document.getElementById('file-getter').type = "text";
+            document.getElementById('file-getter').type = "file";
+        }
+    } catch (e) {
+        console.log("Error: " + e);
+    }
+}
+
+// Visually changes the color of the jscolor picker
+globals.eraserToggle = function (color) {
+    document.getElementById('cp').jscolor.fromString(color);
 }

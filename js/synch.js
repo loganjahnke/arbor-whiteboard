@@ -23,12 +23,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         // Display client login password if tutor is logged in
         // Hide client login password for client [even though they already have password, they shouldn't invite new people]
         if (user.isAnonymous) {
-            $("#client-password").css({
-                display: "none"
-            });
+            $("#invite").hide();
         } else {
             var sessionName = searchParams("session", window.location.search);
-            $("#client-password").html("Client Password: " + sessionName);
+            document.title = "Session: " + sessionName;
         }
         ourUser = user;
         console.log("Welcome! " + user.isAnonymous ? "You are anonymous." : "You are not anonymous.");
@@ -43,12 +41,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 // Saves paper.js data
-window.globals.saveJSON = function (json, width, height, tpw, tph) {
+window.globals.saveJSON = function (json, width, height, tpw, tph, lastCleared) {
     var sessionName = searchParams("session", window.location.search);
     if (ourUser.isAnonymous) {
         firebase.database().ref('sessions/' + sessionName).update({
             data: json,
-            client: "present"
+            client: "present",
+            lastCleared: lastCleared
         });
     } else {
         if (tpw == null) tpw = -1;
@@ -59,13 +58,15 @@ window.globals.saveJSON = function (json, width, height, tpw, tph) {
                 tsWidth: width,
                 tsHeight: height,
                 tpWidth: tpw,
-                tpHeight: tph
+                tpHeight: tph,
+                lastCleared: lastCleared
             });
         } else {
             firebase.database().ref('sessions/' + sessionName).update({
                 data: json,
                 tpWidth: tpw,
-                tpHeight: tph
+                tpHeight: tph,
+                lastCleared: lastCleared
             });
         }
     }
@@ -73,18 +74,17 @@ window.globals.saveJSON = function (json, width, height, tpw, tph) {
 
 // Called everytime data is updated for paper.js in database
 var sessionName = searchParams("session", window.location.search);
-var jsonDataUpdate = firebase.database().ref('sessions/' + sessionName + "/data");
-var imageUpdate = firebase.database().ref('sessions/' + sessionName + "/image");
-var whole = firebase.database().ref('sessions/' + sessionName);
-
-// Everytime JSON is updated
-jsonDataUpdate.on('value', function (snapshot) {
-    globals.loadJSON(snapshot.val());
-});
+var imageUpdate, whole;
+if (sessionName == "demo") {
+    imageUpdate = firebase.database().ref(sessionName + "/image");
+    whole = firebase.database().ref(sessionName);
+} else {
+    imageUpdate = firebase.database().ref('sessions/' + sessionName + "/image");
+    whole = firebase.database().ref('sessions/' + sessionName);
+}
 
 // Everytime image is updated
 imageUpdate.on('value', function (snapshot) {
-    console.log("Image uploaded!");
     if (snapshot.val() == null) {
         clearImage();
     } else {
@@ -95,7 +95,6 @@ imageUpdate.on('value', function (snapshot) {
 
 // Check for delete
 whole.on('value', function (snapshot) {
-    console.log("Whole update");
     if (snapshot.val() == null) {
         document.location.href = "session-ended.html";
     }
@@ -111,6 +110,10 @@ whole.on('value', function (snapshot) {
         globals.tpHeight = snapshot.val().tpHeight;
         globals.scale();
     }
+
+    if (snapshot.val().data != null) {
+        globals.loadJSON(snapshot.val().data, snapshot.val().lastCleared);
+    }
 });
 
 // Ends current session
@@ -120,7 +123,6 @@ function endSession() {
 }
 
 // Deletes image from storage
-
 function deleteImage() {
     firebase.database().ref('sessions/' + sessionName + "/image").remove();
 }
