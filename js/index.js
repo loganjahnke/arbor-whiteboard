@@ -113,7 +113,7 @@ function joinSession(sessionPassword) {
             if (snapshot.val()) {
                 var date = new Date(snapshot.child("dateCreated").val());
                 var now = new Date();
-                if (now - date < 14400000) {
+                if (now - date < 21600000) {
                     document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
                 } else {
                     alert("This session has expired. Please tell your tutor to create a new one.");
