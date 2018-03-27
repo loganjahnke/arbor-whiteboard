@@ -16,6 +16,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function register() {
+    var fname = $('#first-name').val();
+    var lname = $('#last-name').val();
+    var yfname = $('#your-first-name').val();
+    var ylname = $('#your-last-name').val();
     var email = $('#email').val();
     var password = $('#password').val();
     var admin_password = $('#admin-password').val();
@@ -30,19 +34,56 @@ function register() {
         return false;
     }
 
+    if (fname == null || fname.length == 0) {
+        alert("Tutor first name is required.");
+        return false;
+    }
+
+    if (lname == null || lname.length == 0) {
+        alert("Tutor last name is required.");
+        return false;
+    }
+
+    if (yfname == null || yfname.length == 0) {
+        alert("Your first name is required.");
+        return false;
+    }
+
+    if (ylname == null || ylname.length == 0) {
+        alert("Your last name is required.");
+        return false;
+    }
+
     if (admin_password != "ArBoard2018?") {
         alert("Invalid administrator password.");
         return false;
     }
 
+    var currentdate = new Date();
+    var datetime = (currentdate.getMonth() + 1) + "/" +
+        currentdate.getDate() + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":" +
+        currentdate.getSeconds();
+
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-        alert("Successfully made new account with email: " + email);
-        document.location.href = "register.html";
+        firebase.database().ref('tutor/' + user.uid).set({
+            firstName: fname,
+            lastName: lname,
+            createdBy: yfname + " " + ylname,
+            created: datetime,
+            email: email
+        }).then(function (json) {
+            alert("Successfully made new account with email: " + email);
+            document.location.href = "register.html";
+        }).catch(function (error) {
+            console.log("Error creating tutor: " + error);
+            alert("There was an error saving new tutor data. Please try again. If error persists, please contact network administrator.");
+        });
     }).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert("Error registering account: " + errorMessage);
+        console.log(error);
+        alert("There was an error creating a new tutor. Please try again. If error persists, please contact network administrator.");
     });
 
     return false;
