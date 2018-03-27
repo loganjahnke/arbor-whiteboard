@@ -78,7 +78,8 @@ function logClient(fname, lname, email) {
 function logTutor(email) {
     var datetime = getCurrentDateTime();
     firebase.database().ref('tutor/' + firebase.auth().currentUser.uid).update({
-        lastActive: datetime
+        lastActive: datetime,
+        email: email
     }).then(function (json) {
         console.log("Successfully logged tutor.");
         createSession();
@@ -189,9 +190,9 @@ function getCurrentDateTime() {
     var year = currentdate.getFullYear();
     var month = (currentdate.getMonth() + 1) < 10 ? "0" + (currentdate.getMonth() + 1) : currentdate.getMonth() + 1;
     var day = currentdate.getDate() < 10 ? "0" + currentdate.getDate() : currentdate.getDate();
-    var hours = currentdate.getHours();
-    var minutes = currentdate.getMinutes();
-    var seconds = currentdate.getSeconds();
+    var hours = currentdate.getHours() < 10 ? "0" + currentdate.getHours() : currentdate.getHours();
+    var minutes = currentdate.getMinutes() < 10 ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
+    var seconds = currentdate.getSeconds() < 10 ? "0" + currentdate.getSeconds() : currentdate.getSeconds();
     // Datetime format
     return year + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds;
 }
