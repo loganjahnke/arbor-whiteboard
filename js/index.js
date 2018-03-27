@@ -60,13 +60,7 @@ function authenticate(anonymous) {
 
 // Logs the client in the database
 function logClient(fname, lname, email) {
-    var currentdate = new Date();
-    var datetime = (currentdate.getMonth() + 1) + "/" +
-        currentdate.getDate() + "/" +
-        currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":" +
-        currentdate.getSeconds();
+    var datetime = getCurrentDateTime();
     firebase.database().ref('client/' + email.replace(/[^a-zA-Z0-9]/g,'_')).update({
         firstName: fname,
         lastName: lname,
@@ -82,13 +76,7 @@ function logClient(fname, lname, email) {
 
 // Log the tutor in the database
 function logTutor(email) {
-    var currentdate = new Date();
-    var datetime = (currentdate.getMonth() + 1) + "/" +
-        (currentdate.getDate() + 1) + "/" +
-        currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":" +
-        currentdate.getSeconds();
+    var datetime = getCurrentDateTime();
     firebase.database().ref('tutor/' + firebase.auth().currentUser.uid).update({
         lastActive: datetime
     }).then(function (json) {
@@ -103,13 +91,7 @@ function logTutor(email) {
 // Creates a session, can only be called by tutor
 function createSession() {
     var sessionNumber = randomSession();
-    var currentdate = new Date();
-    var datetime = (currentdate.getMonth() + 1) + "/" +
-        (currentdate.getDate() + 1) + "/" +
-        currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":" +
-        currentdate.getSeconds();
+    var datetime = getCurrentDateTime();
     firebase.database().ref('sessions/' + sessionNumber).set({
         active: true,
         tutorID: firebase.auth().currentUser.uid,
@@ -129,7 +111,13 @@ function joinSession(sessionPassword) {
     } else {
         firebase.database().ref('sessions/' + sessionPassword.replace(/\s+/g, '-')).once('value').then(function (snapshot) {
             if (snapshot.val()) {
-                document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
+                var date = new Date(snapshot.child("dateCreated").val());
+                var now = new Date();
+                if (now - date < 14400000) {
+                    document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
+                } else {
+                    alert("This session has expired. Please tell your tutor to create a new one.");
+                }
             } else {
                 alert("Invalid password.");
             }
@@ -192,6 +180,20 @@ function showJoin() {
     $("#welcome").css({
         display: "none"
     });
+}
+
+// Get current date in date time format
+function getCurrentDateTime() {
+    var currentdate = new Date();
+    // Components
+    var year = currentdate.getFullYear();
+    var month = (currentdate.getMonth() + 1) < 10 ? "0" + (currentdate.getMonth() + 1) : currentdate.getMonth() + 1;
+    var day = currentdate.getDate() < 10 ? "0" + currentdate.getDate() : currentdate.getDate();
+    var hours = currentdate.getHours();
+    var minutes = currentdate.getMinutes();
+    var seconds = currentdate.getSeconds();
+    // Datetime format
+    return year + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds;
 }
 
 function backHome() {

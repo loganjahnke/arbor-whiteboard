@@ -59,13 +59,7 @@ function register() {
         return false;
     }
 
-    var currentdate = new Date();
-    var datetime = (currentdate.getMonth() + 1) + "/" +
-        currentdate.getDate() + "/" +
-        currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":" +
-        currentdate.getSeconds();
+    var datetime = getCurrentDateTime();
 
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
         firebase.database().ref('tutor/' + user.uid).set({
@@ -92,4 +86,18 @@ function register() {
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+}
+
+// Get current date in date time format
+function getCurrentDateTime() {
+    var currentdate = new Date();
+    // Components
+    var year = currentdate.getFullYear();
+    var month = (currentdate.getMonth() + 1) < 10 ? "0" + (currentdate.getMonth() + 1) : currentdate.getMonth() + 1;
+    var day = currentdate.getDate() < 10 ? "0" + currentdate.getDate() : currentdate.getDate();
+    var hours = currentdate.getHours();
+    var minutes = currentdate.getMinutes();
+    var seconds = currentdate.getSeconds();
+    // Datetime format
+    return year + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds;
 }
