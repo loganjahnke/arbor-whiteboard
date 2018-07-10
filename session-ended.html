@@ -2,37 +2,69 @@
 <html>
 
 <head>
-    <title>Goodbye</title>
+    <title>Goodbye!</title>
 
     <!-- Styling -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.v1.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.v1.css">
-    <link rel="stylesheet" type="text/css" href="css/main.v1.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="css/fa-light.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.v2.css">
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="js/jquery.v1.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.v1.js"></script>
-    <script type="text/javascript" src="js/index.v1.js"></script>
+    <script type="text/javascript" src="js/jquery.v2.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.v2.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/fancy-functions.js"></script>
+    <script type="text/javascript" src="js/session-ended.js"></script>
 </head>
 
 <body>
-    <div class="outer">
-        <div class="middle">
-            <div class="inner" id="welcome">
-                <h1><span class="thin small">Your session has</span><br />ended</h1>
-                <input type="button" id="back-home" class="btn" value="Back Home" onclick="backHome()" />
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 id="title-welcome" style="margin-top: 10px;">Session Ended</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div id="left-side" class="col-12 col-lg-12">
+                                <div>
+                                    <h2 id="error-message">This session has been closed.</h2>
+                                    <br />
+                                    <button type="submit" onclick="window.location.href = 'index.html';" class="sign-in">Back to Home</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="spreadsheet" type="button" class="sign-in" style="display: none;">Upload CSV</button>
+                    <img id="inline-logo" src="images/arbor-tutors.png" alt="logo" />
+                </div>
             </div>
         </div>
     </div>
-	<div id="footer"></div>
-	<img id="logo" src="images/arbor-tutors.png" />
 </body>
+
+<!-- Show Modal right away, prevent closing -->
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+</script>
 
 </html>

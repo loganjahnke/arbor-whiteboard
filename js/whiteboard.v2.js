@@ -41,7 +41,7 @@ function init() {
     $("#undo").click(window.globals.undo);
     $("#redo").click(window.globals.redo);
     $("#invite").click(function () {
-        openInNewTab("http://arbortutors.net/arboard/email-client.html?session=" + searchParams("session", window.location.search));
+        endSession();
     });
 
     $("#stroke").selectmenu({

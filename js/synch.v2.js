@@ -1,11 +1,22 @@
 // Initialize Firebase
+// Initialize Firebase (Arboard Server)
+// var config = {
+//     apiKey: "AIzaSyCN7FEYgg6lUTF_AAxrpYsax-taEpuucp4",
+//     authDomain: "arboard-1fe52.firebaseapp.com",
+//     databaseURL: "https://arboard-1fe52.firebaseio.com",
+//     projectId: "arboard-1fe52",
+//     storageBucket: "arboard-1fe52.appspot.com",
+//     messagingSenderId: "435636183402"
+// };
+
+// Test Server
 var config = {
-    apiKey: "AIzaSyCN7FEYgg6lUTF_AAxrpYsax-taEpuucp4",
-    authDomain: "arboard-1fe52.firebaseapp.com",
-    databaseURL: "https://arboard-1fe52.firebaseio.com",
-    projectId: "arboard-1fe52",
-    storageBucket: "arboard-1fe52.appspot.com",
-    messagingSenderId: "435636183402"
+    apiKey: "AIzaSyBMGyuv9l2Y-IyGaoxt8YS4IBHyYXDFa-M",
+    authDomain: "arboard-test.firebaseapp.com",
+    databaseURL: "https://arboard-test.firebaseio.com",
+    projectId: "arboard-test",
+    storageBucket: "",
+    messagingSenderId: "8013625199"
 };
 var app = firebase.initializeApp(config);
 var database = firebase.database();

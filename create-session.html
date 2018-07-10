@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Welcome to ArBoard</title>
+    <title>Get Ready to Tutor!</title>
 
     <!-- Styling -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
@@ -22,9 +22,10 @@
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery.v2.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.v2.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/fancy-functions.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/create-session.js"></script>
 </head>
 
 <body>
@@ -32,47 +33,35 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 id="title-welcome" style="margin-top: 10px;">Welcome to ArBoard</h1>
+                    <h1 id="title-welcome" style="margin-top: 10px;">Welcome</h1>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div id="left-side" class="col-12 col-lg-6">
-                                <div class="padded-form">
-                                    <h2>Login</h2>
-                                    <br/>
-                                    <input type="text" id="signin-email" name="email" onchange="validateSignInEmail()" placeholder="Email Address">
-                                    <p class="error" id="signin-error"></p>
+                            <div id="left-side" class="col-12 col-lg-12">
+                                <div>
+                                    <h2>Create Session</h2>
+                                    <br />
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Choose a Client
+                                        </a>
 
-                                    <input type="password" id="signin-password" name="password" placeholder="Password">
-                                    <p class="error" id="signin-password-error"></p>
+                                        <div id="clients" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <!-- Clients go here -->
+                                        </div>
+                                    </div>
                                     <br />
-                                    <button type="submit" onclick="login()" class="sign-in">Sign In</button>
                                     <br />
-                                    <button type="submit" onclick="window.location.href = 'reset-password.html';" class="invisible-btn">Forgot Password?</button>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="padded-form">
-                                    <h2>Create Account</h2>
-                                    <br/>
-                                    <input type="text" id="signup-email" name="signup-email" onchange="validateSignUpEmail()" placeholder="Email Address">
-                                    <p class="error" id="signup-error"></p>
-
-                                    <input type="password" id="signup-password" name="signup-password" oninput="validatePasswordLength()" placeholder="Password">
-                                    <p class="error" id="signup-password-length-error"></p>
-
-                                    <input type="password" id="signup-confirm-password" name="signup-confirm-password" oninput="validatePasswordConfirm()" placeholder="Confirm Password">
-                                    <p class="error" id="signup-password-confirm-error"></p>
-                                    <br />
-                                    <button type="submit" onclick="register()" class="sign-in">Sign Up</button>
-                                    <br />
+                                    <button type="submit" onclick="invite()" class="sign-in">Invite Client</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button id="spreadsheet" type="button" class="sign-in" style="display: none;">Upload CSV</button>
                     <img id="inline-logo" src="images/arbor-tutors.png" alt="logo" />
                 </div>
             </div>

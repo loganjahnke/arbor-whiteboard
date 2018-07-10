@@ -1,12 +1,23 @@
-// Initialize Firebase
+// Initialize Firebase (Arboard Server)
+// var config = {
+//     apiKey: "AIzaSyCN7FEYgg6lUTF_AAxrpYsax-taEpuucp4",
+//     authDomain: "arboard-1fe52.firebaseapp.com",
+//     databaseURL: "https://arboard-1fe52.firebaseio.com",
+//     projectId: "arboard-1fe52",
+//     storageBucket: "arboard-1fe52.appspot.com",
+//     messagingSenderId: "435636183402"
+// };
+
+// Test Server
 var config = {
-    apiKey: "AIzaSyCN7FEYgg6lUTF_AAxrpYsax-taEpuucp4",
-    authDomain: "arboard-1fe52.firebaseapp.com",
-    databaseURL: "https://arboard-1fe52.firebaseio.com",
-    projectId: "arboard-1fe52",
-    storageBucket: "arboard-1fe52.appspot.com",
-    messagingSenderId: "435636183402"
-};
+    apiKey: "AIzaSyBMGyuv9l2Y-IyGaoxt8YS4IBHyYXDFa-M",
+    authDomain: "arboard-test.firebaseapp.com",
+    databaseURL: "https://arboard-test.firebaseio.com",
+    projectId: "arboard-test",
+    storageBucket: "",
+    messagingSenderId: "8013625199"
+  };
+
 var app = firebase.initializeApp(config);
 
 var database = firebase.database();
@@ -114,11 +125,12 @@ function joinSession(sessionPassword) {
             if (snapshot.val()) {
                 var date = new Date(snapshot.child("dateCreated").val());
                 var now = new Date();
-                if (now - date < 21600000) {
-                    document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
-                } else {
-                    alert("This session has expired. Please tell your tutor to create a new one.");
-                }
+                document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
+                // if (now - date < 172800000) { // 21600000 = 6 hours
+                //     document.location.href = "arboard.html?session=" + sessionPassword.replace(/\s+/g, '-');
+                // } else {
+                //     alert("This session has expired. Please tell your tutor to create a new one.");
+                // }
             } else {
                 alert("Invalid password.");
             }

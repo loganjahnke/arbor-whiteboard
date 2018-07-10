@@ -1,0 +1,503 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url("../images/classroom.jpg");
+    background-size: cover;
+    color: rgb(246, 255, 255);
+    margin: 0;
+}
+
+h1 {
+    font-size: 46px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 100;
+}
+
+hr {
+    color: rgba(246, 255, 255, 0.2);
+    background-color: rgba(246, 255, 255, 0.2);
+    border-color: rgba(246, 255, 255, 0.2);
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    border-radius: 2px;
+    width: 50%;
+    text-align: left;
+    background: linear-gradient(to top left, rgba(67, 198, 172, 0.9), rgba(25, 22, 84, 0.9));
+}
+
+.center {
+    text-align: center;
+}
+
+.thin {
+    font-weight: 100;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.small {
+    font-size: 14px;
+}
+
+input,
+select {
+    background: none;
+    font-family: 'Roboto';
+    font-size: 14px;
+    border: none;
+    color: rgba(246, 255, 255, 1.0);
+    font-weight: 100;
+    border-bottom: 1px solid rgba(246, 255, 255, 0.5);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 200px;
+    -webkit-transition: width 200ms ease-in;
+    -ms-transition: width 200ms ease-in;
+    transition: width 200ms ease-in;
+}
+
+input:focus,
+select:focus {
+    outline: 0;
+    border-bottom: 1px solid rgba(246, 255, 255, 1.0);
+    width: 250px;
+    -webkit-transition: width 200ms ease-out;
+    -ms-transition: width 200ms ease-out;
+    transition: width 200ms ease-out;
+}
+
+input::placeholder {
+    color: rgba(246, 255, 255, 1);
+}
+
+label {
+    color: black;
+}
+
+button {
+    font-family: 'Roboto';
+    font-weight: 100;
+    font-size: 14px;
+}
+
+.sign-in {
+    border-radius: 2px;
+    background: rgba(247, 222, 141, 1.0);
+    color: black;
+    font-weight: 500;
+    padding: 10px;
+    width: 200px;
+    border: none;
+    margin-bottom: 1em;
+}
+
+.sign-in:hover {
+    cursor: pointer;
+}
+
+.invisible-btn {
+    font-size: 12px;
+    border-radius: 2px;
+    background: none;
+    margin: 0;
+    padding: 0;
+    color: rgba(246, 255, 255, 1.0);
+    outline: none;
+    text-decoration: none;
+    -webkit-appearance: none;
+    border: none;
+}
+
+.invisible-btn:hover {
+    display: inline-block;
+    background: none;
+    color: rgba(246, 255, 255, 1.0);
+    outline: none;
+    text-decoration: underline;
+    -webkit-appearance: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* .btn {
+    border-radius: 0px;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(246, 255, 255, 1.0);
+    line-height: 2.5em;
+    padding: 10px;
+    margin-bottom: 1em;
+    outline: none;
+    text-decoration: none;
+    color: rgba(246, 255, 255, 1.0);
+    width: 150px;
+    -webkit-appearance: none;
+} */
+
+.small-btn {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    display: inline-block;
+    background: #2C4251;
+    border: 0;
+    line-height: 15%;
+    padding: 1%;
+    outline: none;
+    text-decoration: none;
+    color: #FFFFFF;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.small-btn:hover {
+    cursor: pointer;
+    font-weight: 900;
+}
+
+/* .btn:hover {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 2.5em;
+    outline: none;
+    background: rgba(246, 255, 255, 0.2);
+    text-decoration: none;
+    -webkit-appearance: none;
+    -webkit-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+} */
+
+#join-session,
+.back {
+    background: #D16666;
+}
+
+#can {
+    position: absolute;
+    height: 96%;
+    width: 96%;
+    top: 2%;
+    left: 2%;
+    border: 2px solid black;
+}
+
+.error {
+    color: rgba(247, 222, 141, 1.0);
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.lock-screen {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+#color-picker {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    text-align: right;
+}
+
+.jscolor {
+    text-align: center;
+}
+
+#stroke-desc {
+    text-align: center;
+    position: absolute;
+    top: 10%;
+    right: 8.5%;
+    z-index: 100;
+}
+
+#stroke-button {
+    position: absolute;
+    top: 12%;
+    right: 3%;
+    width: 12%;
+    z-index: 1;
+}
+
+#opacity-desc {
+    text-align: center;
+    position: absolute;
+    top: 17%;
+    right: 8.5%;
+    z-index: 100;
+}
+
+#opacity-button {
+    position: absolute;
+    top: 19%;
+    right: 3%;
+    width: 12%;
+    z-index: 1;
+}
+
+#login-form,
+#short-login-form,
+#join-form {
+    display: none;
+}
+
+input {
+    font-family: 'Roboto';
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#file-getter {
+    font-size: 22px;
+    color: transparent;
+    width: 8%;
+    position: absolute;
+    right: 5%;
+    bottom: 9.5%;
+}
+
+#redo {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 16%;
+    bottom: 3%;
+}
+
+#invite {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 55%;
+    bottom: 3%;
+}
+
+#undo {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 29%;
+    bottom: 3%;
+}
+
+#clr {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 42%;
+    bottom: 3%;
+}
+
+#clr-img {
+    font-size: 18px;
+    width: 12%;
+    position: absolute;
+    right: 3%;
+    bottom: 3%;
+}
+
+#curr-image {
+    /* height: 85%;
+    width: 45%; */
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+#inline-logo {
+    margin: 10px;
+    height: 50px;
+    z-index: 100;
+}
+
+#logo {
+    height: 5%;
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    z-index: 100;
+}
+
+#footer {
+    background: #2C4251;
+    position: absolute;
+    bottom: -5%;
+    left: 0%;
+    height: 15%;
+    width: 100%;
+    z-index: -50;
+}
+
+/* Modal */
+
+/* .modal-backdrop {
+    padding: 25px;
+    border-radius: 2px;
+    width: 50%;
+    text-align: left;
+    background: linear-gradient(to top left, rgba(67, 198, 172, 0.9), rgba(25, 22, 84, 0.9));
+} */
+
+.modal {
+    text-align: center;
+}
+
+.modal-header,
+.modal-footer {
+    padding: 30px;
+    /* margin: 0 auto; */
+    font-weight: 900;
+    border: none;
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+.modal-content {
+    font-family: 'Roboto';
+    background: linear-gradient(to top left, rgba(64, 58, 62, 0.9), rgba(190, 88, 105, 0.9));
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#left-side {
+    border-right: 1px rgba(246, 255, 255, 0.2) solid;
+}
+
+.padded-form {
+    padding: 25px;
+}
+
+/* Dropdown */
+
+.dropdown-menu {
+    font-family: 'Roboto';
+}
+
+.dropdown-toggle {
+    background: none !important;
+    font-family: 'Roboto';
+    font-size: 14px;
+    border: none;
+    color: rgba(246, 255, 255, 1.0);
+    font-weight: 100;
+    border-bottom: 1px solid rgba(246, 255, 255, 0.5) !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 200px;
+    border-radius: 0px;
+}
+
+.dropdown-toggle:hover {
+    border-bottom: border-bottom: 1px solid rgba(246, 255, 255, 0.7) !important;
+}
+
+.dropdown-toggle:focus {
+    outline: 0 !important;
+    border-bottom: 1px solid rgba(246, 255, 255, 1.0) !important;
+}
+
+@media only screen and (max-device-width: 600px) {
+    .modal:before {
+        display: inline;
+        vertical-align: 100%;
+        content: " ";
+    }
+    .modal-dialog {
+        margin: 0;
+        padding: 0;
+        display: inline;
+        text-align: left;
+        vertical-align: 100%;
+    }
+    .modal-content {
+        height: auto;
+        width: auto;
+        min-height: 100%;
+        border-radius: 0;
+    }
+    #title-welcome {
+        font-size: 72px;
+    }
+    h2 {
+        font-size: 64px;
+    }
+    .modal-lg {
+        min-height: 100%;
+        min-width: 100%;
+    }
+    input {
+        font-size: 36px;
+        width: 80%;
+    }
+    input:focus {
+        width: 80%;
+    }
+    .sign-in {
+        font-size: 36px;
+        width: 80%;
+    }
+    #left-side {
+        border-right: none;
+        border-bottom: 1px rgba(246, 255, 255, 0.2) solid;
+    }
+    .padded-form {
+        margin: 15px;
+        padding: 25px;
+    }
+    .invisible-btn {
+        font-size: 26px;
+    }
+    .error {
+        font-size: 26px;
+    }
+}

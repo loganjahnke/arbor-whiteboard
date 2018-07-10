@@ -86,7 +86,8 @@ globals.redo = function () {
 
 var path;
 var color = "#000000";
-var prevColor, prevJSON, clearedLast = false,
+var prevColor = color;
+var prevJSON, clearedLast = false,
     undos = [];
 var stroke = 10;
 var opacity = 1;
