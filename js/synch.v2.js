@@ -27,6 +27,9 @@ var isAnonymous = false;
 var downloadURL = "";
 var imageKeepName = "";
 
+// Tutor and client info
+var tutorId, clientId;
+
 // Called whenever authentication changes (sign in or out)
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -37,15 +40,19 @@ firebase.auth().onAuthStateChanged(function (user) {
             $("#invite").hide();
         } else {
             var sessionName = searchParams("session", window.location.search);
-            document.title = "Session: " + sessionName;
+            document.title = sessionName;
+            firebase.database().ref('sessions/' + sessionName).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    document.title = snapshot.child('tutor/name').val() + ' | ' + snapshot.child('client/name').val();
+                    tutorId = snapshot.child('tutor/id').val();
+                    clientId = snapshot.child('client/id').val();
+                }
+            });
         }
         ourUser = user;
-        console.log("Welcome! " + user.isAnonymous ? "You are anonymous." : "You are not anonymous.");
-        console.log("Email: " + user.email);
         authenticated = true;
     } else {
         user = null;
-        console.log("Goodbye");
         authenticated = false;
         document.location.href = "session-ended.html";
     }
@@ -130,6 +137,8 @@ whole.on('value', function (snapshot) {
 // Ends current session
 function endSession() {
     firebase.database().ref('sessions/' + sessionName).remove();
+    firebase.database().ref('clients/' + clientId + '/session').remove();
+    firebase.database().ref('tutors/' + tutorId + '/session').remove();
     document.location.href = "session-ended.html";
 }
 

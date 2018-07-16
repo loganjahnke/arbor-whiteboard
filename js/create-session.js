@@ -35,14 +35,12 @@ var session = randomSession();
 
 // Dropdown should show who you clicked
 $(function () {
-
     $("#clients").on('click', 'a', function () {
         clientEmail = $(this).attr('title');
         console.log(clientEmail);
         $(".btn:first-child").text($(this).text());
         $(".btn:first-child").val($(this).text());
     });
-
 });
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -51,12 +49,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         // Check if user is an administrator
         db.ref('admins').orderByChild('email').equalTo(user.email).once("value", function (snapshot) {
             if (snapshot.exists()) {
-                // If user is an admin, show the spreadsheet upload area
-                $("#spreadsheet").show();
-                $("#inline-logo").hide();
-
-                console.log(snapshot.val());
-
                 snapshot.forEach(function (child) {
                     // Get first and last name, add it to welcome
                     var firstname = child.child("firstname").val();
@@ -72,7 +64,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     populateClientList(clients);
 
                     // Add session to account
-                    db.ref('admins/' + child.key).update({
+                    db.ref('tutors/' + child.key).update({
                         session: session
                     });
                 });
@@ -81,8 +73,6 @@ firebase.auth().onAuthStateChanged(function (user) {
                 // Check if user is a tutor
                 db.ref('tutors').orderByChild('email').equalTo(user.email).once("value", function (snapshot) {
                     if (snapshot.exists()) {
-                        console.log(snapshot.val());
-
                         snapshot.forEach(function (child) {
                             // Get first and last name, add it to welcome
                             var firstname = child.child("firstname").val();
@@ -121,12 +111,13 @@ function populateClientList(clients) {
     // Loop through each client in client list
     clients.forEach(function (client) {
         // Get email and name
-        var email = client.val();
-        var name = client.key.replace(/_/g, ' ');
+        var firstname = client.child("firstname").val();
+        var lastname = client.child("lastname").val();
+        var email = client.child("email").val();
 
         // Add to option object
         var option = document.createElement("a");
-        option.innerHTML = name;
+        option.innerHTML = firstname + ' ' + lastname;
         option.title = email;
         option.classList.add("dropdown-item");
         option.href = "#";
@@ -170,11 +161,15 @@ function invite() {
                 // Go to ArBoard
                 window.location.href = "arboard.html?session=" + session;
             } else {
-                alert("This client is not currently eligible for ArBoard.");
+                alert("This client has not created an ArBoard account.");
             }
         });
     } else {
         alert("Please select a client; if there are no clients available, then your client is not eligible for ArBoard at this time.");
         return;
     }
+}
+
+function signout() {
+    firebase.auth().signOut();
 }
