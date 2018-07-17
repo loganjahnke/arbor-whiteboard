@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Get Ready to Tutor!</title>
+    <title>Waiting for Tutor</title>
 
     <!-- Styling -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
@@ -16,18 +16,14 @@
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery.v2.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.v2.js"></script>
-    <script type="text/javascript" src="js/jquery.csv.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/fancy-functions.js"></script>
-    <script type="text/javascript" src="js/tutor.js"></script>
-    <script type="text/javascript" src="js/create-session.js"></script>
+    <script type="text/javascript" src="js/waiting.js"></script>
 </head>
 
 <body>
@@ -35,28 +31,16 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 id="title-welcome" style="margin-top: 10px;">Welcome</h1>
+                    <h1 id="title-welcome" style="margin-top: 10px;">Welcome to ArBoard</h1>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div id="left-side" class="col-12 col-lg-6">
-                                <div>
-                                    <h2>Create Session</h2>
-                                    <br />
-                                    <div class="dropdown show">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Choose a Client
-                                        </a>
-
-                                        <div id="clients" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <!-- Clients go here -->
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <button type="submit" onclick="invite()" class="sign-in">Invite Client</button>
+                            <div class="col-12 col-lg-12">
+                                <div class="padded-form">
+                                    <h2 id="waiting">Waiting for Tutor</h2>
+                                    <br/>
+                                    <p>Once your tutor is ready, you will be automatically added to the session.</p>
                                     <br />
                                     <button id="spreadsheet-button" onclick="signout()" type="button" class="invisible-btn">Sign Out</button>
                                 </div>

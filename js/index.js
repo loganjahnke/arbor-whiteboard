@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     })
                 });
 
-                window.location.href = "create-session.html";
+                window.location.href = "administrator.html";
             }
         });
 
@@ -71,9 +71,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
                     // Get latest session name from tutor, join it automatically
                     var session = child.child("session").val();
-                    if (session.length < 5) {
-                        alert("Your tutor has not invited you to a session yet.");
-                        window.location.href = "index.html";
+                    if (session == null || session.length < 5) {
+                        window.location.href = "waiting.html";
                     } else {
                         window.location.href = "arboard.html?session=" + session;
                     }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Get Ready to Tutor!</title>
+    <title>Perform Administrator Tasks</title>
 
     <!-- Styling -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/fancy-functions.js"></script>
     <script type="text/javascript" src="js/tutor.js"></script>
-    <script type="text/javascript" src="js/create-session.js"></script>
+    <script type="text/javascript" src="js/administrator.js"></script>
 </head>
 
 <body>
@@ -40,23 +40,13 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div id="left-side" class="col-12 col-lg-6">
-                                <div>
-                                    <h2>Create Session</h2>
+                            <div id="left-side" class="col-12 col-lg-12">
+                                <div class="padded-form">
+                                    <h2>Update Database</h2>
+                                    <br/>
+                                    <input id="spreadsheet-file" type="file" accept=".csv" class="file-upload">
                                     <br />
-                                    <div class="dropdown show">
-                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Choose a Client
-                                        </a>
-
-                                        <div id="clients" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <!-- Clients go here -->
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <button type="submit" onclick="invite()" class="sign-in">Invite Client</button>
+                                    <button id="spreadsheet-button" onclick="csv()" type="button" class="sign-in">CSV Upload</button>
                                     <br />
                                     <button id="spreadsheet-button" onclick="signout()" type="button" class="invisible-btn">Sign Out</button>
                                 </div>
@@ -70,6 +60,7 @@
             </div>
         </div>
     </div>
+    <div class="loading-modal"></div>
 </body>
 
 <!-- Show Modal right away, prevent closing -->
