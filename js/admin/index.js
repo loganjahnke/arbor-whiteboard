@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     })
                 });
 
-                window.location.href = "administrator.html";
+                window.location.href = "actions.html";
             } else {
                 alert('You do not have permissions to be here.');
                 window.location.href = "index.html";

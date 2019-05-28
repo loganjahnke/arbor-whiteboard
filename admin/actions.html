@@ -6,11 +6,11 @@
 
     <!-- Styling -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.v2.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.v2.css">
-    <link rel="stylesheet" type="text/css" href="css/fa-light.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/main.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.theme.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/fa-light.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.v2.css">
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
@@ -20,14 +20,14 @@
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="js/jquery.v2.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.v2.js"></script>
-    <script type="text/javascript" src="js/jquery.csv.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/fancy-functions.js"></script>
-    <script type="text/javascript" src="js/tutor.js"></script>
-    <script type="text/javascript" src="js/administrator.js"></script>
+    <script type="text/javascript" src="../js/jquery.v2.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.v2.js"></script>
+    <script type="text/javascript" src="../js/jquery.csv.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/fancy-functions.js"></script>
+    <script type="text/javascript" src="../js/tutor.js"></script>
+    <script type="text/javascript" src="../js/admin/actions.js"></script>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div id="left-side" class="col-12 col-lg-12">
+                            <div class="col-12 col-lg-6">
                                 <div class="padded-form">
                                     <h2>Update Database</h2>
                                     <br/>
@@ -48,9 +48,18 @@
                                     <br />
                                     <button id="spreadsheet-button" onclick="csv()" type="button" class="sign-in">CSV Upload</button>
                                     <br />
-                                    <button id="spreadsheet-button" onclick="signout()" type="button" class="invisible-btn">Sign Out</button>
+                                    <button onclick="signout()" type="button" class="invisible-btn">Sign Out</button>
                                 </div>
                             </div>
+                            <!-- <div class="col-12 col-lg-6">
+                                <div class="padded-form">
+                                    <h2>Other Administrator Actions</h2>
+                                    <br />
+                                    <button onclick="viewClients()" type="button" class="sign-in">View Clients</button>
+                                    <br />
+                                    <button onclick="viewTutors()" type="button" class="sign-in">View Tutors</button>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

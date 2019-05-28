@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to ArBoard</title>
+
+    <!-- Styling -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.theme.min.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/fa-light.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.v2.css">
+    <link rel="stylesheet" type="text/css" href="../css/table.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="../js/jquery.v2.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.v2.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/fancy-functions.js"></script>
+    <script type="text/javascript" src="../js/admin/clients.js"></script>
+</head>
+
+<body>
+    <h1>Clients</h1>
+    <div id="table">
+        <table></table>
+    </div>
+</body>
+
+<!-- Show Modal right away, prevent closing -->
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+</script>
+
+</html>

@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                     })
                 });
 
-                window.location.href = "administrator.html";
+                window.location.href = "admin/actions.html";
             }
         });
 
@@ -155,7 +155,6 @@ function login() {
 function register() {
     var email = document.getElementById('signup-email').value;
     var password = document.getElementById('signup-password').value;
-    var confirm_password = document.getElementById('signup-confirm-password').value;
 
     // If password validation critera fails, stop creation
     if (!validatePasswordLength() || !validatePasswordConfirm()) {

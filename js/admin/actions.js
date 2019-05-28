@@ -239,3 +239,7 @@ function checkForLoading() {
         $('body').removeClass("loading");
     }
 }
+
+function viewClients() {
+    window.location.href = "admin/view/clients.html";
+}
